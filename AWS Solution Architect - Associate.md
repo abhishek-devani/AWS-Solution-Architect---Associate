@@ -259,7 +259,7 @@ Software Licenses
 > ### `EBS Encryption`
 
 - Encryption has a minimal impact on latency
-- **to Encrypt an unencrypted EBS Volume**
+- **To Encrypt an unencrypted EBS Volume**
      - Create an EBS snapshot of the volume.
      - Encrypt the EBS snapshot (using copy).
 
