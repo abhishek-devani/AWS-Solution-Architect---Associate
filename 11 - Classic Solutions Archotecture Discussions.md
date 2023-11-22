@@ -31,7 +31,7 @@
 - As a solution architect we say maybe we should use M5.large instead of t2.micro
 - We stopped instance then we changed the instance type and started the instance again.
 <!-- - We have **experienced downtime while scaling vertically.** -->
-- **`Limit:` It worked but it isn't good because We have experienced downtime while scaling vertically.**
+> **`Limit:` It worked but it isn't good because We have experienced downtime while scaling vertically.**
 
 ### Scaling Horizontally
 
