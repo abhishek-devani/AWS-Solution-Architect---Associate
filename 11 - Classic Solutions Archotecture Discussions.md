@@ -33,7 +33,7 @@
 <!-- - We have **experienced downtime while scaling vertically.** -->
 - `Limit:` **It worked but it isn't good because We have experienced downtime while scaling vertically.**
 
-### `Scaling Horizontally`
+### Scaling Horizontally
 
 - As a solution architect we started thinking on Scaling Horizontal.
 - And for that we started adding more EC2 instances, they're all M5 large.
@@ -42,7 +42,7 @@
 - And so our users, they need to be aware of the exact values of three elastic IP to talk to our instances.
 - `Limit:` **It worked but user have to remember more IPs and we have to manage more infrastructure, and it's pretty tricky**
 
-> ### `Use Route 53`
+### Use Route 53
 
 - Let's remove elastic IPs from all the instance because There's only 5 elastic IPs per region per accounts by default so it's not a lot.
 - Instead of this we'll setup route 53 and set up website URL as api.whatisthetime.com.
@@ -51,16 +51,16 @@
 - So now users will query route 53 and they get IP addresses of EC2 Instances.
 - `Limit:` **When we do remove an instance user will get the same response for an one hour because of TTL.**
 
-> ### `Use Load Balancer`
+### Use Load Balancer
 
 - We have setup **private ec2 instance now** and in the **same AZ.**
 - We'll use **ELB + Health Checks** and link to our instances.
 - ELB will be public while EC2 instances is private so they restrict traffic between using security group.
 - We will then connect route 53 to out ELB using alias record because IP of ELB has its IP changing all the time.
-- This alias record will point from Route 53 --> ELB.
+- This alias record will point from Route 53 --ELB.
 - `Limit:` **Adding and removing instances manually is pretty hard to do.**
 
-> ### `Use Auto Scaling Group`
+### Use Auto Scaling Group
 
 - We will create ASG and this time our EC2 will be managed by ASG.
 - And so this allows our ASG to basically scale based on the demand, scale in and scale out.
@@ -68,7 +68,7 @@
 - It seems like a really `stabled architecture`.
 - `Limit:` **What if AZ goes down due to some natural calamities? Our app will be entire down**
 
-> ### `Implement Multi AZ Application`
+### Implement Multi AZ Application
 
 - We will implement multi Az to be highly available.
 - We are gonna have to ELB, and on top of health checks, it's also going to be multi-AZ, and it's going to be launched on AZ 1 to 3.
@@ -76,11 +76,11 @@
 - So now if AZ-1 goes down, we'll still have AZ-2 and AZ-3 to serve our traffic to users.
 - We have effectively made our app **multi AZ, and highly available and resilient to failure**.
 
-> ### `Minimum 2 AZ ==> Let's Reserve Capacity`
+### Minimum 2 AZ ==Let's Reserve Capacity
 
 - We have 2 AZ and we know at least one instance we'll be running in each AZ, so why don't we reserve capacity?
 - Why don't we start basically the diminishing the cost of our application? because we know that for sure two instances must be running at all time during the year. 
 - And so by reserving instance maybe for the capacity of our auto-scaling group, then we're going to save a lot of cost in the future.
 - Whereas the new instances that get launched, maybe they're gonna be temporary, so on demand is fine.
 
-> `Note:` **As a solution architect you have to understand what are the requirements, and what should we architect in return to these requirements**
+`Note:` **As a solution architect you have to understand what are the requirements, and what should we architect in return to these requirements**
