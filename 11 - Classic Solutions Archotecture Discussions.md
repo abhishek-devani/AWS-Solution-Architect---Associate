@@ -21,7 +21,7 @@
 ---
 ## Stateless Web App - What time is it?
 
-### `Scaling Vertically`
+> ### **Scaling Vertically**
 
 - We have **one user** and one t2.micro **public EC2 instance.**
 - When user send a request to ec2 than it will get current time.
