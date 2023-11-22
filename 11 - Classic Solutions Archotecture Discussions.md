@@ -49,7 +49,7 @@
 - We've decided its going to be an `A record` with a TTl of a 1 hour.
 - An `A record` means that DNS will going to give me a list of IP.
 - So now users will query route 53 and they get IP addresses of EC2 Instances.
-- `Limit:` **When we do remove an instance user will get the same response for an one hour because of TTL.**
+- **`Limit:` When we do remove an instance user will get the same response for an one hour because of TTL.**
 
 ### Use Load Balancer
 
@@ -58,7 +58,7 @@
 - ELB will be public while EC2 instances is private so they restrict traffic between using security group.
 - We will then connect route 53 to out ELB using alias record because IP of ELB has its IP changing all the time.
 - This alias record will point from Route 53 --ELB.
-- `Limit:` **Adding and removing instances manually is pretty hard to do.**
+- **`Limit:` Adding and removing instances manually is pretty hard to do.**
 
 ### Use Auto Scaling Group
 
@@ -66,7 +66,7 @@
 - And so this allows our ASG to basically scale based on the demand, scale in and scale out.
 - Now we have a `stable application` with `no downtime,` `auto-scaling` and `load balanced`
 - It seems like a really `stabled architecture`.
-- `Limit:` **What if AZ goes down due to some natural calamities? Our app will be entire down**
+- **`Limit:` What if AZ goes down due to some natural calamities? Our app will be entire down**
 
 ### Implement Multi AZ Application
 
@@ -83,4 +83,4 @@
 - And so by reserving instance maybe for the capacity of our auto-scaling group, then we're going to save a lot of cost in the future.
 - Whereas the new instances that get launched, maybe they're gonna be temporary, so on demand is fine.
 
-`Note:` **As a solution architect you have to understand what are the requirements, and what should we architect in return to these requirements**
+> **`Note:` As a solution architect you have to understand what are the requirements, and what should we architect in return to these requirements**
