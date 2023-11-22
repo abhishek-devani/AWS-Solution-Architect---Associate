@@ -1,6 +1,6 @@
-# 11 - Classic Solutions Archotecture Discussions
+# 11 - Classic Solutions Architecture Discussions
 
-## Section Introduction
+## <span style="color: blue;"> Section Introduction </span>
 
 - Let's understand how all the technologies we've seen work together
 - We'll see the progression of a Solution's architect mindset through many **sample case studies:**
@@ -11,7 +11,7 @@
     - Beanstalk
 
 ---
-## Stateless Web App - WhatIsTheTime.Com
+## <span style="color: blue;"> Stateless Web App - WhatIsTheTime.Com </span>
 
 - WhatIsTheTime.Com allows people to know what time it is.
 - We don't need a database
@@ -19,9 +19,9 @@
 - We want to fully scale vertically and horizontally, no downtime
 
 ---
-## Stateless Web App - What time is it?
+## <span style="color: blue;"> Stateless Web App - What time is it? </span>
 
-> ### `Scaling Vertically`
+### <span style="color: red;"> `Scaling Vertically` </span>
 
 - We have **one user** and one t2.micro **public EC2 instance.**
 - When user send a request to ec2 than it will get current time.
