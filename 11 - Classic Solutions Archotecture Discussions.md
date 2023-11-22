@@ -21,7 +21,7 @@
 ---
 ## Stateless Web App - What time is it?
 
-> ### **Scaling Vertically**
+### Scaling Vertically
 
 - We have **one user** and one t2.micro **public EC2 instance.**
 - When user send a request to ec2 than it will get current time.
@@ -33,7 +33,7 @@
 <!-- - We have **experienced downtime while scaling vertically.** -->
 - `Limit:` **It worked but it isn't good because We have experienced downtime while scaling vertically.**
 
-> ### `Scaling Horizontally`
+### `Scaling Horizontally`
 
 - As a solution architect we started thinking on Scaling Horizontal.
 - And for that we started adding more EC2 instances, they're all M5 large.
