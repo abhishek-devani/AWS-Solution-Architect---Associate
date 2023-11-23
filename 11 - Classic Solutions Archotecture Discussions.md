@@ -163,3 +163,68 @@
 - For an **RDS**, we just want to **restrict traffic coming from the EC2 security group**.
 
 > **`Note:` This is a more complicated application. There's three tier such as Client Tier, Web Tier and the database tier**
+
+---
+## Stateful Web App - MyWordPress.com
+
+- We are trying to create a fully scalable WordPress website.
+- We want that website to access and correctly display picture uploads.
+- Our user data, and the blog content should be stored in a MySQL database.
+
+## Scaling with Aurora: Multi AZ and Read Replicas
+
+- Consider previous architecture.
+- We will replace RDS layer with Aurora MySQL and I can have Multi AZ, Read Replicas.
+- We can setup even Global Databases using Aurora if we wanted to.
+- Aurora scales better and it is easier to upwrite.
+
+## Storing Images with EBS
+
+- Let's go back to simple architecture where we have `1 EC2` and it has `1 EBS volume` attached to it. So it's in 1 AZ.
+- We are connected to Load Balancer.
+- So our user wants to send image to load balancer and that image makes it all the way through to EBS. So now image is stored in EBS.
+- **`Limit:` EBS only works well for 1 instance but when we start scaling then is's started to become problematic**.
+
+## Storing Images with EFS
+
+- We use the same architecture but instead of EBS we will use EFS.
+- EFS creates an ENI's (Elastic Network Interface) and it created these ENI's into each AZ.
+- And these ENI's can be used for all our EC2 instances to access our EFS drive. 
+- Storage is shared between all the instances.
+
+---
+## Instantiating  Applications Quickly
+
+### Problems
+
+- When launching a full stack application (EC2, EBS, RDS), it can take time to:
+    - Install Application
+    - Insert initial (or recovery) data
+    - Configure everything
+    - Launch an application
+
+> **`Note:` We can take advantage of the cloud to speed that up**
+
+### Solutions
+
+#### EC2 Instances:
+
+- **Use a Golden AMI:**
+    - Install your applications, OS dependencies etc., beforehand and launch your EC2 instance from the `Golden AMI`.
+
+- **Bootstrap using User Data:**
+    - For dynamic configuration, use User Data scripts.
+
+- **Hybrid:**
+    - Mix Golden AMI and User Data (Elastic Beanstalk)
+
+#### RDS Databases:
+
+- **Restore from Snapshot**
+    - The database will have schemas and data ready!
+
+#### EBS Volumes:
+
+- **Restore from Snapshot**
+    - The disk will already be formatted and have data!
+
