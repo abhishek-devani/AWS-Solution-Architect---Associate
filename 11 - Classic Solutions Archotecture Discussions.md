@@ -31,7 +31,7 @@
 - As a solution architect we say maybe we should use M5.large instead of t2.micro
 - We stopped instance then we changed the instance type and started the instance again.
 <!-- - We have **experienced downtime while scaling vertically.** -->
-**Limit: It worked but it isn't good because We have experienced downtime while scaling vertically.**
+- **Limit: It worked but it isn't good because We have experienced downtime while scaling vertically.**
 
 ### Scaling Horizontally
 
@@ -76,7 +76,7 @@
 - So now if AZ-1 goes down, we'll still have AZ-2 and AZ-3 to serve our traffic to users.
 - We have effectively made our app **multi AZ, and highly available and resilient to failure**.
 
-### Minimum 2 AZ ==Let's Reserve Capacity
+### Minimum 2 AZ ==> Let's Reserve Capacity
 
 - We have 2 AZ and we know at least one instance we'll be running in each AZ, so why don't we reserve capacity?
 - Why don't we start basically the diminishing the cost of our application? because we know that for sure two instances must be running at all time during the year. 
@@ -84,3 +84,82 @@
 - Whereas the new instances that get launched, maybe they're gonna be temporary, so on demand is fine.
 
 > **`Note:` As a solution architect you have to understand what are the requirements, and what should we architect in return to these requirements**
+
+---
+## Stateful Web App - MyClothes.com
+
+- It allows people to buy cloths online.
+- There's shopping cart.
+- Our website is having hundreds of users at the same time.
+- We need to scale, maintain horizontal scalability and keep our web application as stateless as possible.
+- Users should not lose their shopping cart.
+- Users should have their details (address, etc) in a database.
+
+### Basic Architecture
+
+- We have user + Route 53 + Multi AZ ELB + ASG with 3 AZ.
+- We users create shopping cart with 1st instance.
+- **`Limit: `If next request goes to 2nd instance then user won't be able to view shopping cart, so shopping cart is lost for user.**
+
+### Introduce Stickiness (Session Affinity)
+
+- It's an ELB feature, so we enable ELB stickiness.
+- So every request of particular user to the same instance because of stickiness.
+- **`Limit: `What is an EC2 instance gets terminated for some reason, then we still lose our shopping cart**
+
+### Introduce User Cookies
+
+- So instead of having the EC2 instances store the content of the shopping cart, let's say that the user is the one storing the shopping cart content.
+- So every time it connects to the load balancer, it basically is going to say, by the way in my shopping cart, I have all these things. 
+- And that's done through web cookies.
+- We **achieved statelessness** because now each EC2 instance doesn't need to know what happened before. The user will tell us what happened before.
+- **`Limit 1: `HTTP request are heavier because we are sending cart content in web cookies we're sending more and more data every time we add something into our cart**
+- **`Limit 2: `There is some level of security risk because the cookies, they can be altered by attackers maybe**
+- **`Limit 3: `Cookies must be validated**
+- **`Limit 4: `Cookies must be less than 4kb**
+
+### Introduce Server Session
+
+- Instead of sending whole shopping cart in we cookies, we're just going to send **Session ID**.
+- In the background, we're gonna have maybe an **ElastiCache Cluster** to store/retrieve session data.
+- When user tell EC2 that I'm going to add this content to cart then ec2 instance will add that cart content into the ElastiCache.
+- And ID to retrieve this content is going to be Session ID.
+- All this is a millisecond performance, So all these things happen really quickly.
+- Alternatively we can use **DynamoDB** to store session data.
+- It's secure now because no one can change what's in ElastiCache Cluster.
+
+### Storing User Data in Database
+
+- Now, we are gonna store user data (address) in a database.
+- So again, we're gonna talk to ourEC2 instance, and this time it's going to talk to an RDS instance.
+- RDS is going to be great because it's for long term storage. so we can store and retrieve data such as address, name, etc directly by taking to RDS.
+- So our website is doing amazing. 
+
+### Scaling Reads
+
+- Now we have more and more users and we realize that one of the most thing they do is they navigate the website.
+- They do reads, they get product information etc. 
+- We can use **RDS Master**, which takes the writes but we can also have **RDS Read Replicas** with some replication happening.
+- We can have up to 15 read replicas.
+
+### Scaling Reads (Alternative) - Lazy Loading
+
+- Our user talks to an EC2 instance. It looks in the ElastiCache for information. If it doesn't have then it's going to read from RDS and put in back into ElastiCache. SO just the information is cached.
+- This pattern allows us to do less traffic on RDS, basically **decrease the CPU usage** and **improve performance** at the same time.
+- **`Limit: `We need to do cache maintenance now and it's a bit more difficult**.
+
+### Multi AZ - Survive Disasters
+
+- Make ELB Multi AZ.
+- Make ASG Multi AZ.
+- Make RDS Multi AZ.
+- Make ElastiCache Multi AZ.
+
+### Security Groups
+
+- Maybe We'll **open HTTP/HTTPS traffic from anywhere** on the **ALB (Application Load Balancer) side**.
+- For an **EC2 instance side**, we just want to **restrict traffic coming from the load balancer**. 
+- For an **ElastiCache**, we just want to **restrict traffic coming from the EC2 security group**.
+- For an **RDS**, we just want to **restrict traffic coming from the EC2 security group**.
+
+> **`Note:` This is a more complicated application. There's three tier such as Client Tier, Web Tier and the database tier**
