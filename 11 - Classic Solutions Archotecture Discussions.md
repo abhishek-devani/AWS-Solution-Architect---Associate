@@ -31,7 +31,7 @@
 - As a solution architect we say maybe we should use M5.large instead of t2.micro
 - We stopped instance then we changed the instance type and started the instance again.
 <!-- - We have **experienced downtime while scaling vertically.** -->
-- **Limit: It worked but it isn't good because We have experienced downtime while scaling vertically.**
+- **`Limit:` It worked but it isn't good because We have experienced downtime while scaling vertically.**
 
 ### Scaling Horizontally
 
@@ -99,7 +99,7 @@
 
 - We have user + Route 53 + Multi AZ ELB + ASG with 3 AZ.
 - We users create shopping cart with 1st instance.
-- **`Limit: `If next request goes to 2nd instance then user won't be able to view shopping cart, so shopping cart is lost for user.**
+- **`Limit:` If next request goes to 2nd instance then user won't be able to view shopping cart, so shopping cart is lost for user.**
 
 ### Introduce Stickiness (Session Affinity)
 
@@ -113,10 +113,10 @@
 - So every time it connects to the load balancer, it basically is going to say, by the way in my shopping cart, I have all these things. 
 - And that's done through web cookies.
 - We **achieved statelessness** because now each EC2 instance doesn't need to know what happened before. The user will tell us what happened before.
-- **`Limit 1: `HTTP request are heavier because we are sending cart content in web cookies we're sending more and more data every time we add something into our cart**
-- **`Limit 2: `There is some level of security risk because the cookies, they can be altered by attackers maybe**
-- **`Limit 3: `Cookies must be validated**
-- **`Limit 4: `Cookies must be less than 4kb**
+- **`Limit 1:` HTTP request are heavier because we are sending cart content in web cookies we're sending more and more data every time we add something into our cart**
+- **`Limit 2:` There is some level of security risk because the cookies, they can be altered by attackers maybe**
+- **`Limit 3:` Cookies must be validated**
+- **`Limit 4:` Cookies must be less than 4kb**
 
 ### Introduce Server Session
 
@@ -146,7 +146,7 @@
 
 - Our user talks to an EC2 instance. It looks in the ElastiCache for information. If it doesn't have then it's going to read from RDS and put in back into ElastiCache. SO just the information is cached.
 - This pattern allows us to do less traffic on RDS, basically **decrease the CPU usage** and **improve performance** at the same time.
-- **`Limit: `We need to do cache maintenance now and it's a bit more difficult**.
+- **`Limit:` We need to do cache maintenance now and it's a bit more difficult**.
 
 ### Multi AZ - Survive Disasters
 
