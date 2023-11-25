@@ -136,8 +136,9 @@
 - It will protect against unintended deletes (ability to restore version)
 - Easy roll back to previous version
 
-> **`Note:` Any file that is not versioned prior to enabling versioning will have the version `null`**
-> **`Note:` Suspending versioning does not delete the previous versioning**
+> **`Notes`**
+> - Any file that is not versioned prior to enabling versioning will have the version `null`
+> - Suspending versioning does not delete the previous versioning
 
 ---
 ## Amazon S3 - Replication (CRR & SRR)
@@ -166,4 +167,4 @@
 > - Optionally, you can replicate existing objects using **S3 Batch Replication**
 > - There is no chaining of replication
 >   - If bucket 1 has replication in bucket 2, which has replication on bucket 3
->   - then objects created in bucket 1 are not replicated to bucket 3.
+>   - Then objects created in bucket 1 are not replicated to bucket 3.
