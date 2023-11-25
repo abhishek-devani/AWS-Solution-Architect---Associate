@@ -228,3 +228,44 @@
 - **Restore from Snapshot**
     - The disk will already be formatted and have data!
 
+---
+## Elastic Beanstalk
+
+### Developer Problem on AWS
+
+- Managing Infrastructure
+- Deploying Code
+- Configuring all the database , load balancer, etc
+- Scaling Concerns
+
+> **`Note:` Most web apps have the same architecture (ALB + ASG)**
+
+> **`Note:` When developer possibly want a single way of deploying their app and this is where Beanstalk come into the picture**
+
+### Overview
+
+- It is a developer centric view of deploying an Application on AWS.
+- It uses all the component we have seen before: EC2, ASG, ELB, EDS, ...
+- Managed Service
+    - Automatically handles capacity provisioning, load balancing, scaling, application health monitoring, instance configuration, ... 
+    - Just the application code is the responsibility of the developer
+- We still have full control over the configuration of each component
+- Beanstalk is a free but we pay for the underlying instances
+
+### Components
+
+#### Application
+- collection of Elastic Beanstalk components
+- Environments, Versions, Configurations, ...
+
+#### Application Version
+- An Iteration of your application code
+
+#### Environment
+- Collection of AWS Resources running an application version (so only one application version runs at a time)
+- **Tiers:** Web Server Environment Tier & Worker Environment Tier
+- You can create multiple environments (dev, test, prod, ...)
+
+#### Work Flow
+
+Create Application ==> Upload Version ==> Launch Environment ==> Manage Environment
