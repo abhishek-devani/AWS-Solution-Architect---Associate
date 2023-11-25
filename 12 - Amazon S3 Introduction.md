@@ -68,7 +68,7 @@
 - less common (can be disabled)
 
 > **`Notes`**
-> - **an IAM principal can access an S3 if**
+> - **An IAM principal can access an S3 if**
 > - **The user IAM permissions ALLOW it OR the resource policy ALLOWS it**
 > - **AND there's no explicit DENY**
 
@@ -138,8 +138,8 @@
 - Easy roll back to previous version
 
 > **`Notes`**
-> - Any file that is not versioned prior to enabling versioning will have the version `null`
-> - Suspending versioning does not delete the previous versioning
+> - **Any file that is not versioned prior to enabling versioning will have the version `null`**
+> - **Suspending versioning does not delete the previous versioning**
 
 ---
 ## Amazon S3 - Replication (CRR & SRR)
@@ -164,8 +164,8 @@
 - Live replication between production and test accounts
 
 > **`Notes`**
-> - After you enable Replication, only new objects are replicated.
-> - Optionally, you can replicate existing objects using **S3 Batch Replication**
-> - There is no chaining of replication
->   - If bucket 1 has replication in bucket 2, which has replication on bucket 3
->   - Then objects created in bucket 1 are not replicated to bucket 3.
+> - **After you enable Replication, only new objects are replicated.**
+> - **Optionally, you can replicate existing objects using S3 Batch Replication**
+> - **There is no chaining of replication**
+>   - **If bucket 1 has replication in bucket 2, which has replication on bucket 3**
+>   - **Then objects created in bucket 1 are not replicated to bucket 3.**
