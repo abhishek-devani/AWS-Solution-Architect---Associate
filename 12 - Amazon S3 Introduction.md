@@ -67,9 +67,10 @@
 #### Bucket Access Control List (ACL)
 - less common (can be disabled)
 
-> **`Note:` an IAM principal can access an S3 if**
->- **The user IAM permissions ALLOW it OR the resource policy ALLOWS it**
->- **AND there's no explicit DENY**
+> **`Notes`**
+> - **an IAM principal can access an S3 if**
+> - **The user IAM permissions ALLOW it OR the resource policy ALLOWS it**
+> - **AND there's no explicit DENY**
 
 ### Encryption
 
