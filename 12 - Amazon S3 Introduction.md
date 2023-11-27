@@ -151,6 +151,7 @@
 - Buckets can be in different AWS accounts.
 - Copying is asynchronous
 - Must give proper IAM permission to S3.
+- Only delete markers are replicated not delete (permanently delete).
 
 ### Use Cases
 
@@ -169,3 +170,60 @@
 > - **There is no chaining of replication**
 >   - **If bucket 1 has replication in bucket 2, which has replication on bucket 3**
 >   - **Then objects created in bucket 1 are not replicated to bucket 3.**
+
+---
+## S3 Storage Classes
+
+### Amazon S3 Standard - General Purpose
+
+- Used for frequently accessed data
+- Low latency and high throughput
+- Sustain 2 concurrent facility failures
+
+#### Use Cases
+- Big Data Analytics
+- Mobile & Gaming Applications
+- Content Distribution
+
+### Amazon S3 Standard - Infrequent Access (IA)
+
+- For data is less frequently accessed, but require rapid access when needed
+- Lower Cost than S3 standard but you will have a cost on retrieval 
+
+#### Use Cases
+- Disaster Recovery and backups
+
+### Amazon S3 One Zone - Infrequent Access
+
+- High durability (99.9999999999%) in a single AZ
+- Data lost when AZ is destroyed
+
+#### Use Cases
+- Storing secondary backup copies of on-premise data, or data you can recreate
+
+### Amazon S3 Glacier Storage Class
+
+- Low-cost Object Storage meant for archiving / backup
+- `Pricing:` price for storage + object retrieval cost
+
+#### Amazon S3 Glacier Instant Retrieval
+- Millisecond retrieval, great for data accessed once a quarter
+- Minimum storage duration of 90 days.
+
+#### Amazon S3 Glacier Flexible Retrieval
+- **Expedited (1 to 5 minutes)**
+- **Standard (3 to 5 hours)**
+- **Bulk (5 to 12 hours) - free**
+- Minimum storage duration of 90 days.
+
+#### Amazon S3 Glacier Deep Archive - for long term storage
+- **Standard (12 hours)**
+- **Bulk (48 hours)**
+- Minimum storage duration of 180 days.
+
+### Amazon S3 Intelligent Tiering
+
+- Small monthly monitoring and auto-tiering free
+- Moves objects automatically between Access Tiers based on usage
+- Small monthly monitoring fee and auto tiering fee
+- No Retrieval charges 
