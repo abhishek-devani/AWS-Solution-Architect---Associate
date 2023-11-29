@@ -88,7 +88,7 @@
 - Increase transfer speed by transferring file to an AWS edge location which will forward the data to the S3 bucket in the target region.
 - Compatible with multi-part upload.
 
-### S3 Byte-Range Fetches
+### S3 Byte Range Fetches
 
 - Parallelize GETs by requesting specific byte ranges.
 - Better resilience in case of failures.
