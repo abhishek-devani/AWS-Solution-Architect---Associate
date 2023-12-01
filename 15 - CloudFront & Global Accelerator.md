@@ -24,10 +24,10 @@
 
 ```markdown
 
-| CloudFront | S3 Cross Region Replication |
-| ---------- | --------------------------- |
-| Global Ege Network | Must be setup for each region you want replication to happen |
-| Files are cached for a TTL (maybe a day) | Files are updated in real time |
-| Great for static content | Great for dynamic content |
+|               CloudFront                  |               S3 Cross Region Replication                     |
+|-------------------------------------------|---------------------------------------------------------------|
+| Global Ege Network                        | Must be setup for each region you want replication to happen  |
+| Files are cached for a TTL (maybe a day)  | Files are updated in real time                                |
+| Great for static content                  | Great for dynamic content                                     |
 
 ```
