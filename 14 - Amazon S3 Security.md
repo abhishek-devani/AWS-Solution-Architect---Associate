@@ -115,16 +115,60 @@ aws s3api put-bucket-versioning --bucket mfa-demo-stephane --versioning-configur
 ---
 ## S3 Access Logs
 
--  For audit purpose, you may want to log all access to S3 buckets
+- For audit purpose, you may want to log all access to S3 buckets
 - Any request made to S3, from any account, authorized or denied, will be logged into another S3 bucket
 - That data can be analyzed using data analysis tools such as Amazon Athena
 - The target logging bucket must be in the same AWS region
 - The log format is at: 
     - https://docs.aws.amazon.com/AmazonS3/latest/dev/LogFormat.htm
 
-## S3 Access Logs : Warning
+### S3 Access Logs : Warning
 
-Do not set your logging bucket to be the monitored bucket
-• It will create a logging loop, and your bucket will grow exponentially
+- Do not set your logging bucket to be the monitored bucket (Bucket in which you are storing actual files).
+- It will create a logging loop, and your bucket will grow exponentially.
 
-![Alt text](image.png)
+---
+## Amazon S3 - Pre Signed URLs
+
+- Generate pre-signed URLs using the S3 Console, AWS CLI or SDK
+- URL Expiration
+    - S3 Console – up to 12 hours
+    - AWS CLI – uo tp ~168 hours
+- Users given a pre-signed URL inherit the permissions of the user that generated the URL for GET / PUT
+
+### Examples: 
+- Allow only logged-in users to download a premium video from your S3 bucket
+- Allow an ever-changing list of users to download files by generating URLs dynamically
+- Allow temporarily a user to upload a file to a precise location in your S3 bucket
+
+---
+## S3 Glacier Vault Lock
+
+- Adopt a WORM (Write Once Read Many) model
+- It's lock policy at the whole bucket level.
+- Create a Vault Lock Policy • Lock the policy for future edits (can no longer be changed or deleted)
+- Helpful for compliance and data retention.
+
+---
+## S3 Object Lock (versioning must be enabled)
+
+- Adopt a WORM (Write Once Read Many) model
+- Block an object version deletion for a specified amount of time
+
+### Retention mode - Compliance:
+
+- Object versions can't be overwritten or deleted by any user, including the root user
+- Objects retention modes can't be changed, and retention periods can't be shortened
+
+### Retention mode - Governance:
+- Most users can't overwrite or delete an object version or alter its lock settings 
+- Some users have special permissions to change the retention or delete the object
+
+### Retention Period: 
+
+- protect the object for a fixed period, it can be extended 
+
+### Legal Hold: 
+
+- protect the object indefinitely, independent from retention period
+- can be freely placed and removed using the s3:PutObjectLegalHold IAM permission
