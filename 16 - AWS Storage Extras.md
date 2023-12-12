@@ -281,4 +281,3 @@
 | **Snowcone / Snowball / Snowmobile:** | to move large amount of data to the cloud, physically                    |
 | **Database:**                         | for specific workloads, usually with indexing and querying               |
 --------------------------------------------------------------------------------------------------------------------
-
