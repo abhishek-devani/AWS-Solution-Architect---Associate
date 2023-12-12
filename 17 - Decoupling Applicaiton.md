@@ -194,7 +194,16 @@
 - You can have up to 100 Consumers (due to the 100 Group ID)
 - You have up to 300 messages per second (or 3000 if using batching)
 
-| Header 1 | Header 2 | Header 3 |
-| ---------|----------|----------|
-| Row 1, Col 1 | Row 1, Col 2 | Row 1, Col 3 |
-| Row 2, Col 1 | Row 2, Col 2 | Row 2, Col 3 |
+### SQS vs SNS vs Kinesis
+
+| **SQS** | **SNS** | **Kinesis** |
+| ------- | ------- | ----------- |
+| Consumer “pull data” | Push data to many subscribers | Standard: pull data (2 MB per shard) |
+| Data is deleted after being consumed | Up to 12,500,000 subscribers | Enhanced-fan out: push data (2 MB per shard per consumer) |
+| Can have as many workers (consumers) as we want | Data is not persisted (lost if not delivered) | Possibility to replay data |
+| No need to provision throughput | Pub/Sub | Meant for real-time big data, analytics and ETL |
+| Ordering guarantees only on FIFO queues | Up to 100,000 topics | Ordering at the shard level |
+| Individual message delay capability | No need to provision throughput | Data expires after X days (x: 1 to 365)
+| | Integrates with SQS for fan- out architecture pattern | Provisioned mode or on-demand capacity mode |
+| | FIFO capability for SQS FIFO | |
+
