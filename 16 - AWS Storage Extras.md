@@ -47,17 +47,11 @@
 ---
 ## Snow Family
 
---------------------------------------------------------------------------------------------------------
 |                  | Snowcone & Snowcone SSD | Snowball Edge Storage Optimized |       Snowmobile      |
-|                  | ----------------------- | ------------------------------- |       ----------      |
-| Storage Capacity |       8 TB HDD          |       80 TB usable              |         < 100 PB      |
-|                  |       14 TB SSD         |                                 |                       |
-|                  | ----------------------- | ------------------------------- |   ------------------  |
-| Migration Size   |       Up to 24 TB,      |      Up to petabytes, offline   |     Up to exabytes,   |
-|                  |   online and offline    |                                 |         offline       |
-|                  | ----------------------- | ------------------------------- |   ------------------  |
+|----------------- | ----------------------- | ------------------------------- | -------------------   |
+| Storage Capacity |   8 TB HDD, 14 TB SSD   |       80 TB usable              |         < 100 PB      |
+| Migration Size   | Up to 24 TB, online and offline | Up to petabytes, offline|Up to exabytes, offline|
 | DataSync agent   |   Pre Installed         |                                 |                       |
---------------------------------------------------------------------------------------------------------
 
 ---
 ## What is Edge Computing?
@@ -265,19 +259,19 @@
 
 ---
 ## Storage Comparison
--------------------------------------------------------------------------------------------------------------------|
-| **S3:**                               | Object Storage                                                           |
-| **S3 Glacier:**                       | Object Archival                                                          |
-| **EBS volumes:**                      | Network storage for one EC2 instance at a time                           |
-| **Instance Storage:**                 | Physical storage for your EC2 instance (high IOPS)                       |
-| **EFS:**                              | Network File System for Linux instances, POSIX filesystem                |
-| **FSx for Windows:**                  | Network File System for Windows servers                                  |
-| **FSx for Lustre:**                   | High Performance Computing Linux file system                             |
-| **FSx for NetApp ONTAP:**             | High OS Compatibility                                                    |
-| **FSx for OpenZFS:**                  | Managed ZFS file system                                                  |
-| **Storage Gateway:**                  | S3 & FSx File Gateway, Volume Gateway (cache & stored), Tape Gateway     |
-| **Transfer Family:**                  | FTP, FTPS, SFTP interface on top of Amazon S3 or Amazon EFS              |
-| **DataSync:**                         | Schedule data sync from on-premises to AWS, or AWS to AWS                |
-| **Snowcone / Snowball / Snowmobile:** | to move large amount of data to the cloud, physically                    |
-| **Database:**                         | for specific workloads, usually with indexing and querying               |
---------------------------------------------------------------------------------------------------------------------
+| **Services** | **Usage** |
+| ------------ | --------- |
+| **S3**                               | Object Storage                                                           |
+| **S3 Glacier**                       | Object Archival                                                          |
+| **EBS volumes**                      | Network storage for one EC2 instance at a time                           |
+| **Instance Storage**                 | Physical storage for your EC2 instance (high IOPS)                       |
+| **EFS**                              | Network File System for Linux instances, POSIX filesystem                |
+| **FSx for Windows**                  | Network File System for Windows servers                                  |
+| **FSx for Lustre**                   | High Performance Computing Linux file system                             |
+| **FSx for NetApp ONTAP**             | High OS Compatibility                                                    |
+| **FSx for OpenZFS**                  | Managed ZFS file system                                                  |
+| **Storage Gateway**                  | S3 & FSx File Gateway, Volume Gateway (cache & stored), Tape Gateway     |
+| **Transfer Family**                  | FTP, FTPS, SFTP interface on top of Amazon S3 or Amazon EFS              |
+| **DataSync**                         | Schedule data sync from on-premises to AWS, or AWS to AWS                |
+| **Snowcone / Snowball / Snowmobile** | to move large amount of data to the cloud, physically                    |
+| **Database**                         | for specific workloads, usually with indexing and querying               |
